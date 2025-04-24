@@ -217,94 +217,15 @@ const TimelineDashboard = () => {
     }
   };
 
+
   // Custom tooltip component
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
-
-      // Determinar información adicional según el tipo de datos
-      let additionalInfo = null;
-
-      if (activeTab === "months" && data.year && data.month) {
-        additionalInfo = (
-          <div className="mt-1 pt-1 border-t border-gray-200">
-            <p className="text-xs text-gray-500">
-              Año: <span className="font-medium">{data.year}</span>
-            </p>
-          </div>
-        );
-      } else if (activeTab === "semesters" && data.year && data.semester) {
-        additionalInfo = (
-          <div className="mt-1 pt-1 border-t border-gray-200">
-            <p className="text-xs text-gray-500">
-              Año: <span className="font-medium">{data.year}</span>
-            </p>
-            <p className="text-xs text-gray-500">
-              Semestre: <span className="font-medium">{data.semester}</span>
-            </p>
-          </div>
-        );
-      } else if (activeTab === "days") {
-        const date = new Date(data.name);
-        additionalInfo = (
-          <div className="mt-1 pt-1 border-t border-gray-200">
-            <p className="text-xs text-gray-500">
-              Fecha completa:{" "}
-              <span className="font-medium">
-                {date.toLocaleDateString("es-ES", {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-            </p>
-          </div>
-        );
-      }
-
-      // Calcular porcentaje respecto al total
-      const totalCases =
-        activeTab === "years"
-          ? data.years?.reduce((sum, year) => sum + year.cases, 0)
-          : data.years?.reduce((sum, year) => sum + year.cases, 0);
-
-      const percentage = totalCases
-        ? ((data.cases / totalCases) * 100).toFixed(2)
-        : "N/A";
-
-      // Determinar el color según el tipo de vista
-      const borderColor = COLORS[activeTab.slice(0, -1)];
-
       return (
-        <div
-          className="bg-white p-4 shadow-lg rounded-md border-l-4"
-          style={{ borderLeftColor: borderColor }}
-        >
-          <div className="flex items-center justify-between">
-            <h3 className="font-bold text-gray-800">{data.formattedName}</h3>
-            <span className="text-xs px-2 py-1 bg-gray-100 rounded-full">
-              {activeTab.slice(0, -1)}
-            </span>
-          </div>
-
-          <div className="mt-2">
-            <div className="flex justify-between items-center">
-              <p className="text-gray-600">Casos:</p>
-              <p className="font-bold text-gray-800">
-                {data.cases.toLocaleString()}
-              </p>
-            </div>
-
-            {percentage !== "N/A" && (
-              <div className="flex justify-between items-center mt-1">
-                <p className="text-gray-600">% del total:</p>
-                <p className="font-medium">{percentage}%</p>
-              </div>
-            )}
-          </div>
-
-          {additionalInfo}
+        <div className="bg-white p-4 shadow rounded border border-gray-200">
+          <p className="font-bold">{data.formattedName}</p>
+          <p>Casos: <span className="font-medium">{data.cases.toLocaleString()}</span></p>
         </div>
       );
     }
