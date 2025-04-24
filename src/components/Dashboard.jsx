@@ -16,7 +16,7 @@ const Dashboard = () => {
   const navItems = [
     {
       name: 'General',
-      path: '/dashboard/general',
+      path: '/',
       icon: <BarChart2 size={20} />
     },
     {

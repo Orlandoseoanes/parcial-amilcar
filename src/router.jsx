@@ -2,8 +2,8 @@ import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import Overview from './pages/Overview';
 import Analytics from './pages/Analytics';
-import Reports from './pages/Reports';
 import Settings from './pages/Settings';
+import TimelineDashboard from './pages/Reports';
 
 const router = createBrowserRouter([
   {
@@ -19,8 +19,8 @@ const router = createBrowserRouter([
         element: <Analytics />,
       },
       {
-        path: 'reports',
-        element: <Reports />,
+        path: '/dashboard/tiempo',
+        element: <TimelineDashboard />,
       },
       {
         path: 'settings',

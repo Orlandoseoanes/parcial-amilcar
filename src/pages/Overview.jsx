@@ -14,6 +14,7 @@ import {
   Bar,
   Legend
 } from 'recharts';
+
 import {
   fetchDashboardEstado,
   fetchDashboardSexo,
